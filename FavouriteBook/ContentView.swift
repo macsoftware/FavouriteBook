@@ -9,13 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+        NavigationView{
+            List{
+                ForEach(myFavourites){ fav in
+                    Section(header: Text(fav.title)){
+                        ForEach(fav.elements){ elem in
+                            NavigationLink(destination: DetailsView(chosenFavElement: elem)){
+                                Text(elem.name)
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }.navigationBarTitle(Text("Favourites Book"))
     }
 }
 
